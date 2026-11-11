@@ -12,6 +12,15 @@ df = pd.DataFrame(data)
 
 print(df.to_string(index=False))
 
-# Save to CSV so you can open it in Excel
-df.to_csv("wellness_dataset.csv", index=False)
+# Work out how wide each column needs to be
+widths = [max(len(str(v)) for v in [col] + df[col].astype(str).tolist()) for col in df.columns]
+
+# Build aligned rows (header + data)
+rows = [list(df.columns)] + df.astype(str).values.tolist()
+lines = ["| ".join(v.ljust(w) for v, w in zip(row, widths)) for row in rows]
+
+# Save as a neatly aligned CSV
+with open("wellness_dataset.csv", "w") as f:
+    f.write("\n".join(lines))
+
 print("\nSaved as wellness_dataset.csv")
