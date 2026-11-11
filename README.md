@@ -1,4 +1,4 @@
-# Wellness Dataset Generator
+ Wellness Dataset
 
 A small Python script that builds a daily wellness dataset and saves it as a neatly aligned CSV file. The dataset is meant to be edited and extended over time.
 
